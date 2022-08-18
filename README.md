@@ -1,24 +1,9 @@
 # tennis-availability
+# Requirements
+- CORS plugin to be active in browser (https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
+# Run the App
+```bash
+yarn
 yarn serve
 ```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
