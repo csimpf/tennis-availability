@@ -1,7 +1,7 @@
 <script>
 const API_URL =
-  "https://play.tennis.com.au/v0/BookACourtVenue/WestEppingParkTennisCourts/GetVenueSessions?startDate=2022-08-18&endDate=2022-08-21";
-const DAY_OF_WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  "https://play.tennis.com.au/v0/BookACourtVenue/WestEppingParkTennisCourts/GetVenueSessions?startDate=2022-08-23&endDate=2022-09-10";
+const DAY_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export default {
   name: "tennisTable",
   data() {
