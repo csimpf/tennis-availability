@@ -1,6 +1,6 @@
 <script>
 const API_URL =
-  "https://play.tennis.com.au/v0/BookACourtVenue/WestEppingParkTennisCourts/GetVenueSessions?startDate=2022-08-23&endDate=2022-09-10";
+  "https://play.tennis.com.au/v0/BookACourtVenue/WestEppingParkTennisCourts/GetVenueSessions";
 const DAY_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export default {
   name: "tennisTable",
@@ -10,10 +10,13 @@ export default {
       debug: null,
     };
   },
-  created() {
-    fetch(API_URL)
-      .then((rsp) => rsp.json().then((json) => (this.msg = json)))
-      .catch((e) => (this.debug = e));
+  mounted() {
+    const today = new Date();
+    const nextWeek = new Date();
+    nextWeek.setDate(today.getDate() + 7);
+    document.getElementById("startDate").value = today.toJSON().slice(0, 10);
+    document.getElementById("endDate").value = nextWeek.toJSON().slice(0, 10);
+    this.getData(today.toJSON().slice(0, 10), nextWeek.toJSON().slice(0, 10));
   },
 
   methods: {
@@ -35,6 +38,15 @@ export default {
       const temp = new Date(date);
       return DAY_OF_WEEK[temp.getDay()] + " " + temp.toLocaleDateString();
     },
+    getData(startDate, endDate) {
+      fetch(API_URL + "?startDate=" + startDate + "&endDate=" + endDate)
+        .then((rsp) => rsp.json().then((json) => (this.msg = json)))
+        .catch((e) => window.alert(e));
+    },
+    onSubmit(e) {
+      e.preventDefault();
+      this.getData(e.target.startDate.value, e.target.endDate.value);
+    },
   },
 
   computed: {
@@ -50,6 +62,14 @@ export default {
 
 <template>
   <div class="main">
+    <form id="dateRange" @submit="onSubmit">
+      <label for="startDate">Start Date:</label>
+      <input id="startDate" type="date" />
+      <label for="endDate">End Date:</label>
+      <input id="endDate" type="date" />
+      <input type="submit" value="Submit" />
+    </form>
+    <span v-if="!msg">Loading...</span>
     <div class="courts" v-for="resource in resourcesArray" :key="resource.Name">
       <h1>{{ resource.Name }}</h1>
       <table v-for="day in resource.Days" :key="day.Date">
