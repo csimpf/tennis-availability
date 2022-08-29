@@ -62,16 +62,21 @@ export default {
 
 <template>
   <div class="main">
+    <h1>Tennis Availability 🎾</h1>
     <form id="dateRange" @submit="onSubmit">
-      <label for="startDate">Start Date:</label>
+      <label for="startDate"> Start Date: </label>
       <input id="startDate" type="date" />
-      <label for="endDate">End Date:</label>
+      <label for="endDate"> End Date: </label>
       <input id="endDate" type="date" />
       <input type="submit" value="Submit" />
     </form>
-    <span v-if="!msg">Loading...</span>
+    <a href="https://play.tennis.com.au/WestEppingParkTennisCourts/court-hire/book-by-date">Book by Date</a>
+    - 
+    <a href="https://play.tennis.com.au/WestEppingParkTennisCourts/court-hire/book-by-court">Book by Court</a>
+    <div v-if="!msg">Loading...</div>
+    
     <div class="courts" v-for="resource in resourcesArray" :key="resource.Name">
-      <h1>{{ resource.Name }}</h1>
+      <h2>{{ resource.Name }}</h2>
       <table v-for="day in resource.Days" :key="day.Date">
         <tr>
           <th>{{ displayDate(day.Date) }}</th>
