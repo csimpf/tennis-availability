@@ -1,6 +1,6 @@
 <script>
 const API_URL =
-  "https://play.tennis.com.au/v0/BookACourtVenue/WestEppingParkTennisCourts/GetVenueSessions";
+  "https://west-epping-tennis.herokuapp.com/index.php";
 const DAY_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export default {
   name: "tennisTable",
