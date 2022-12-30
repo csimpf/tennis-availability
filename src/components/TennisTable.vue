@@ -1,6 +1,6 @@
 <script>
 const API_URL =
-  "https://west-epping-tennis.herokuapp.com/index.php";
+  "https://play.tennis.com.au/v0/BookACourtVenue/WestEppingParkTennisCourts/GetVenueSessions";
 const DAY_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 export default {
   name: "tennisTable",
@@ -22,11 +22,11 @@ export default {
   methods: {
     mapCategory(num) {
       switch (num) {
-        case 1e3:
+        case 1000:
           return "BOOKING";
-        case 2e3:
+        case 2000:
           return "COACHING";
-        case 7e3:
+        case 7000:
           return "MAINTENANCE";
         case 0:
           return "FREE";
@@ -70,11 +70,17 @@ export default {
       <input id="endDate" type="date" />
       <input type="submit" value="Submit" />
     </form>
-    <a href="https://play.tennis.com.au/WestEppingParkTennisCourts/court-hire/book-by-date">Book by Date</a>
-    - 
-    <a href="https://play.tennis.com.au/WestEppingParkTennisCourts/court-hire/book-by-court">Book by Court</a>
+    <a
+      href="https://play.tennis.com.au/WestEppingParkTennisCourts/court-hire/book-by-date"
+      >Book by Date</a
+    >
+    -
+    <a
+      href="https://play.tennis.com.au/WestEppingParkTennisCourts/court-hire/book-by-court"
+      >Book by Court</a
+    >
     <div v-if="!msg">Loading...</div>
-    
+
     <div class="courts" v-for="resource in resourcesArray" :key="resource.Name">
       <h2>{{ resource.Name }}</h2>
       <table v-for="day in resource.Days" :key="day.Date">
@@ -87,13 +93,14 @@ export default {
               mapCategory(sess.Category),
               sess.Recurrence && 'recurrence',
             ]"
-            :style="{ height: ((sess.Interval * 2) / 60) * 13.5 - 1 + 'px' }"
+            :style="{ height: ((sess.Interval * 2) / 60) * 17.5 - 1 + 'px' }"
+            :title="mapCategory(sess.Category)"
           >
             {{
               Math.floor(sess.StartTime / 60) * 100 +
               ((sess.StartTime / 60) % 1) * 60
             }}
-            | {{ mapCategory(sess.Category) }} | {{ sess.Interval / 60 }} h
+            {{ sess.Interval / 60 }} h
           </td>
         </tr>
       </table>
@@ -109,8 +116,7 @@ export default {
 }
 
 table {
-  font-size: 0.5em;
-
+  font-size: 0.75em;
   border-collapse: collapse;
   border-radius: 4px;
   background-color: lightgrey;
@@ -120,9 +126,10 @@ table {
 }
 
 table td {
-  border: 1px solid darkgrey;
-  padding: 0;
+  border: 1px solid floralwhite;
+  padding: 0 4px;
   background-color: lightgrey;
+  user-select: none;
 }
 
 td:hover {
@@ -133,6 +140,6 @@ td:hover {
   background-color: rgb(208, 197, 194);
 }
 .FREE {
-  background-color: lightgreen;
+  background-color: #63d471;
 }
 </style>
