@@ -62,7 +62,7 @@ export default {
 
 <template>
   <div class="main">
-    <h1>Tennis Availability 🎾</h1>
+    <h1>Test Tennis Availability 🎾</h1>
     <form id="dateRange" @submit="onSubmit">
       <label for="startDate"> Start Date: </label>
       <input id="startDate" type="date" />
